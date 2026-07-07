@@ -71,17 +71,20 @@ For this, the [Component] should use [Detail] during [Process].
 ### Solutions
 
 **Option A: [Direction: Least Effort]**
+
 - [Result]
 - [TechnicalDebt]
 - [Estimation]
 - [Cost]
 
 **Option B: [Direction: Quality Effort]**
+
 - [Result]
 - [Estimation]
 - [Cost]
 
 **Option C: [Direction: Compromise]**
+
 - [Result]
 - [Consequence]
 - [TechnicalDebt]

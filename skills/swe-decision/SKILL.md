@@ -56,12 +56,11 @@ The final result should look something like:
 ```markdown
 ---
 title: "CCC-NNNN: [Decision Title]"
-status: "Proposed"
+status: "proposed/implemented"
 date: "YYYY-MM-DD"
 authors: "[Stakeholder Names/Roles]"
 tags: ["architecture", "decision"]
 supersedes: ""
-superseded_by: ""
 ---
 
 [Problem statement, technical constraints, business requirements, and environmental factors requiring this decision.]

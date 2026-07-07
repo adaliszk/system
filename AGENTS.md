@@ -1,8 +1,8 @@
 # Context
 
-Personalized take on how to manage systems, configurations, and shared tooling 
-using Nix and Stow. Decouples system profiles into re-usable flake packages for 
-maximum modularity. Avoids derivation-based configuration to allow on-the-fly 
+Personalized take on how to manage systems, configurations, and shared tooling
+using Nix and Stow. Decouples system profiles into re-usable flake packages for
+maximum modularity. Avoids derivation-based configuration to allow on-the-fly
 fine-tuning on each machine.
 
 # Prerequisites
