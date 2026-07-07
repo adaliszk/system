@@ -1,39 +1,17 @@
 { pkgs, ... }:
 
 let
-  ollama-system = pkgs.writeShellApplication {
-    name = "ollama";
-    runtimeInputs = with pkgs; [
-      ollama-rocm
-      ollama-cpu
-    ];
-    text = ''
-      if [ -e /dev/kfd ]; then
-        exec ${pkgs.ollama-rocm}/bin/ollama "$@"
-      else
-        exec ${pkgs.ollama-cpu}/bin/ollama "$@"
-      fi
-    '';
-  };
-  llama-turboquant-system = pkgs.writeShellApplication {
-    name = "llama-turboquant-server";
-    runtimeInputs = with pkgs; [
-      llama-turboquant-rocm
-      llama-turboquant-cpu
-    ];
-    text = ''
-      if [ -e /dev/kfd ]; then
-        exec ${pkgs.llama-turboquant-rocm}/bin/llama-server "$@"
-      else
-        exec ${pkgs.llama-turboquant-cpu}/bin/llama-server "$@"
-      fi
-    '';
-  };
+  ollama-system = if builtins.pathExists "/dev/kfd"
+    then pkgs.ollama-rocm
+    else pkgs.ollama-cpu;
+  llama-turboquant-system = if builtins.pathExists "/dev/kfd"
+    then pkgs.llama-turboquant-rocm
+    else pkgs.llama-turboquant-cpu;
   agents-update = pkgs.writeShellApplication {
     name = "agents-update";
     runtimeInputs = with pkgs; [
       jq
-      huggingface-hub
+      python314Packages.huggingface-hub
       ollama-system
       coreutils
     ];
@@ -75,5 +53,6 @@ pkgs.buildEnv {
     llama-turboquant-system
     agents-update
     opencode
+    oterm
   ];
 }
