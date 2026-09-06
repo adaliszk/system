@@ -8,20 +8,12 @@
       url = "github:numtide/system-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    homeManager = {
-      url = "github:nix-community/home-manager";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     jetbrainsPlugins = {
       url = "github:theCapypara/nix-jetbrains-plugins";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     agentTools = {
       url = "github:numtide/llm-agents.nix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    agentSkills = {
-      url = "github:Kyure-A/agent-skills-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
@@ -31,10 +23,8 @@
       self,
       nixpkgs,
       systemManager,
-      homeManager,
       flakeUtils,
       jetbrainsPlugins,
-      agentSkills,
       agentTools,
       ...
     }:
@@ -59,9 +49,7 @@
               pkgs
               system
               systemManager
-              homeManager
               jetbrainsPlugins
-              agentSkills
               agentTools
               ;
           };
