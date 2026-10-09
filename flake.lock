@@ -1,19 +1,5 @@
 {
   "nodes": {
-    "adaliszkSkills": {
-      "flake": false,
-      "locked": {
-        "path": ".",
-        "type": "path"
-      },
-      "original": {
-        "path": ".",
-        "type": "path"
-      },
-      "parent": [
-        "skills"
-      ]
-    },
     "agentSkills": {
       "inputs": {
         "nixpkgs": [
@@ -319,7 +305,6 @@
     },
     "skills": {
       "inputs": {
-        "adaliszkSkills": "adaliszkSkills",
         "agentSkills": "agentSkills",
         "cavemanSkills": "cavemanSkills",
         "nixpkgs": [
