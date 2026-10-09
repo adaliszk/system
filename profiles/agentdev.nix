@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, skills, ... }:
 
 let
   ollama-system = if builtins.pathExists "/dev/kfd"
@@ -54,5 +54,6 @@ pkgs.buildEnv {
     agents-update
     opencode
     oterm
+    skills
   ];
 }

@@ -16,6 +16,10 @@
       url = "github:numtide/llm-agents.nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    skills = {
+      url = "path:./skills";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -26,6 +30,7 @@
       flakeUtils,
       jetbrainsPlugins,
       agentTools,
+      skills,
       ...
     }:
     flakeUtils.lib.eachDefaultSystem (
@@ -52,6 +57,7 @@
               jetbrainsPlugins
               agentTools
               ;
+            skills = skills.packages.${system}.default;
           };
         systemNames = map (pkgs.lib.removeSuffix ".nix") (builtins.attrNames (builtins.readDir ./systems));
         systems = pkgs.lib.genAttrs systemNames (name: (importNix ./systems name).system);
@@ -79,5 +85,8 @@
           ];
         };
       }
-    );
+    )
+    // {
+      inherit (skills) homeManagerModules;
+    };
 }
