@@ -2,7 +2,6 @@
   pkgs,
   systemManager,
   system,
-  homeManager,
   ...
 }:
 
@@ -47,11 +46,6 @@ let
       fi
     '';
   };
-  homeSwitch = pkgs.writeShellApplication {
-    name = "home-switch";
-    runtimeInputs = [ homeManager.packages.${system}.default ];
-    text = ''home-manager switch --impure --flake "$@"'';
-  };
 in
 pkgs.buildEnv {
   name = "essentials";
@@ -59,7 +53,6 @@ pkgs.buildEnv {
     systemManager.packages.${system}.default
     systemSwitch
     systemUpdate
-    homeSwitch
     proto
   ];
 }
