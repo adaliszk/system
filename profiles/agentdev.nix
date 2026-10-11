@@ -54,6 +54,7 @@ pkgs.buildEnv {
     agents-update
     opencode
     oterm
+    claude-code
     skills
   ];
 }
