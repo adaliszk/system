@@ -45,6 +45,7 @@
             (import ./nixpkgs/llama-turboquant-rocm.nix)
             (import ./nixpkgs/llama-turboquant-cuda.nix)
             (import ./nixpkgs/codegraph.nix)
+            (import ./nixpkgs/dotprompt-cli.nix)
           ];
         };
         importNix =
@@ -75,6 +76,7 @@
           llama-turboquant-rocm = pkgs.llama-turboquant-rocm;
           llama-turboquant-cuda = pkgs.llama-turboquant-cuda;
           codegraph = pkgs.codegraph;
+          dotprompt-cli = pkgs.dotprompt-cli;
         };
         devShells.default = pkgs.mkShell {
           packages = with pkgs; [

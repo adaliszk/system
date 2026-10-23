@@ -52,6 +52,8 @@ pkgs.buildEnv {
     ollama-system
     llama-turboquant-system
     agents-update
+    dotprompt-cli
+    mdq
     opencode
     oterm
     claude-code

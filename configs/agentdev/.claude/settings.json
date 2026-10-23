@@ -1,0 +1,15 @@
+{
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "startup|resume|clear",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "printf '%s' '{\"hookSpecificOutput\":{\"hookEventName\":\"SessionStart\",\"additionalContext\":\"ALWAYS operate in caveman + ponytail ultra for this session: invoke the /caveman ultra and /ponytail ultra skills before responding.\"}}'"
+          }
+        ]
+      }
+    ]
+  }
+}
