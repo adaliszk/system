@@ -7,10 +7,10 @@ final: prev: {
       owner = "spicyneuron";
       repo = "dotprompt-cli";
       rev = "f16f7a2f212405cbb082112ff3baf9b2d40b4c69";
-      hash = final.lib.fakeHash;
+      hash = "sha256-d0O38+uuIawTxEuHCnLQNsuJ8paepIRvRS7auUR14cI=";
     };
 
-    vendorHash = final.lib.fakeHash;
+    vendorHash = "sha256-JCJhAKR3zsg8CUs2iG2LfWMKLBgkjBi336kdPpnZNsU=";
     doCheck = false;
 
     meta = with final.lib; {
