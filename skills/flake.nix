@@ -15,6 +15,18 @@
       url = "github:DietrichGebert/ponytail";
       flake = false;
     };
+    karpathySkills = {
+      url = "github:swarmclawai/andrej-karpathy-skills";
+      flake = false;
+    };
+    superpowersSkills = {
+      url = "github:obra/superpowers";
+      flake = false;
+    };
+    addyosmaniSkills = {
+      url = "github:addyosmani/agent-skills";
+      flake = false;
+    };
   };
 
   outputs =
@@ -24,6 +36,9 @@
       agentSkills,
       cavemanSkills,
       ponytailSkills,
+      karpathySkills,
+      superpowersSkills,
+      addyosmaniSkills,
       ...
     }:
     let
@@ -40,6 +55,18 @@
           path = ponytailSkills;
           subdir = "skills";
         };
+        karpathy = {
+          path = karpathySkills;
+          subdir = "skills";
+        };
+        superpowers = {
+          path = superpowersSkills;
+          subdir = "skills";
+        };
+        addyosmani = {
+          path = addyosmaniSkills;
+          subdir = "skills";
+        };
         adaliszk = {
           path = self;
           subdir = ".";
@@ -48,12 +75,54 @@
       enabledSkills = [
         "caveman"
         "caveman-review"
+        "ultracave"
         "ponytail"
         "ponytail-review"
         "swe-task"
         "swe-story"
         "swe-decision"
+        "mdq"
+        "dotprompt"
+        "idea-refine"
       ];
+
+      # Skills installed under an id that differs from their discovered id.
+      # The attribute name is the final id; `from` is the source key and `path`
+      # is relative to that source's subdir.
+      explicitSkills = {
+        karpathy = {
+          from = "karpathy";
+          path = "karpathy-guidelines";
+        };
+        idea-brainstorm = {
+          from = "superpowers";
+          path = "brainstorming";
+        };
+        plan-write = {
+          from = "superpowers";
+          path = "writing-plans";
+        };
+        plan-breakdown = {
+          from = "addyosmani";
+          path = "planning-and-task-breakdown";
+        };
+        context-optimize = {
+          from = "addyosmani";
+          path = "context-engineering";
+        };
+        swe-review-quality = {
+          from = "addyosmani";
+          path = "code-review-and-quality";
+        };
+        swe-simplify = {
+          from = "addyosmani";
+          path = "code-simplification";
+        };
+        swe-worktree = {
+          from = "superpowers";
+          path = "using-git-worktrees";
+        };
+      };
 
       # Build the selection once; it is system-independent.
       catalog = agentLib.discoverCatalog sources;
@@ -63,6 +132,7 @@
       };
       selection = agentLib.selectSkills {
         inherit catalog allowlist sources;
+        skills = explicitSkills;
       };
 
       forAllSystems = nixpkgs.lib.genAttrs [
@@ -103,6 +173,7 @@
           enable = true;
           inherit sources;
           skills.enable = enabledSkills;
+          skills.explicit = explicitSkills;
           targets.claude.enable = true;
           targets.opencode.enable = true;
         };
