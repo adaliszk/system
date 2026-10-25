@@ -62,6 +62,11 @@
         superpowers = {
           path = superpowersSkills;
           subdir = "skills";
+          # Only consumed via explicit `from`+`path` below, never by discovery.
+          # Namespace its catalog ids so collisions with other sources (e.g.
+          # `test-driven-development`, also shipped by addyosmani) can't break
+          # `discoverCatalog`, which scans every source and rejects any dup id.
+          idPrefix = "superpowers";
         };
         addyosmani = {
           path = addyosmaniSkills;
@@ -72,17 +77,15 @@
           subdir = ".";
         };
       };
+      # Third-party skills, selected by discovered id from their sources.
+      # Each has a tracking marker at ./<id>/.upstream (folders without a
+      # SKILL.md are invisible to discovery, so they never collide).
       enabledSkills = [
         "caveman"
         "caveman-review"
         "ultracave"
         "ponytail"
         "ponytail-review"
-        "swe-task"
-        "swe-story"
-        "swe-decision"
-        "mdq"
-        "dotprompt"
         "idea-refine"
       ];
 
@@ -90,6 +93,29 @@
       # The attribute name is the final id; `from` is the source key and `path`
       # is relative to that source's subdir.
       explicitSkills = {
+        # Own skills, authored in this repo (source `adaliszk`, subdir ".").
+        swe-task = {
+          from = "adaliszk";
+          path = "swe-task";
+        };
+        swe-story = {
+          from = "adaliszk";
+          path = "swe-story";
+        };
+        swe-decision = {
+          from = "adaliszk";
+          path = "swe-decision";
+        };
+        mdq = {
+          from = "adaliszk";
+          path = "mdq";
+        };
+        dotprompt = {
+          from = "adaliszk";
+          path = "dotprompt";
+        };
+
+        # Third-party skills installed under a renamed id.
         karpathy = {
           from = "karpathy";
           path = "karpathy-guidelines";
