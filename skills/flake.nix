@@ -94,6 +94,10 @@
       # is relative to that source's subdir.
       explicitSkills = {
         # Own skills, authored in this repo (source `adaliszk`, subdir ".").
+        adaliszk-instructions = {
+          from = "adaliszk";
+          path = "adaliszk-instructions";
+        };
         swe-task = {
           from = "adaliszk";
           path = "swe-task";

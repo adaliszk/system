@@ -16,6 +16,10 @@
       url = "github:numtide/llm-agents.nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    treefmt = {
+      url = "github:numtide/treefmt-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     skills = {
       url = "path:./skills";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -30,6 +34,7 @@
       flakeUtils,
       jetbrainsPlugins,
       agentTools,
+      treefmt,
       skills,
       ...
     }:
@@ -66,6 +71,14 @@
           builtins.attrNames (builtins.readDir ./profiles)
         );
         profiles = pkgs.lib.genAttrs profileNames (importNix ./profiles);
+        treefmtEval = treefmt.lib.evalModule pkgs {
+          projectRootFile = "flake.nix";
+          programs = {
+            nixfmt.enable = true;
+            dprint.enable = true;
+            shfmt.enable = true;
+          };
+        };
       in
       {
         systemConfigs = systems;
@@ -78,12 +91,13 @@
           codegraph = pkgs.codegraph;
           dotprompt-cli = pkgs.dotprompt-cli;
         };
+        formatter = treefmtEval.config.build.wrapper;
+        checks.formatting = treefmtEval.config.build.check self;
         devShells.default = pkgs.mkShell {
-          packages = with pkgs; [
-            dprint
-            nixfmt
-            nufmt
-            shfmt
+          packages = [
+            treefmtEval.config.build.wrapper
+            pkgs.dprint
+            pkgs.nufmt
           ];
         };
       }
