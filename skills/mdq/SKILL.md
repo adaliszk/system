@@ -29,17 +29,17 @@ back yourself.
 
 # Selectors
 
-| Target | Syntax |
-| --- | --- |
-| Heading + its section | `# heading text` |
-| Unordered / ordered list | `- item` / `1. item` |
-| Tasks | `- [ ]` unchecked, `- [x]` checked, `- [?]` any |
-| Links / images | `[text](url)` / `![alt](url)` |
-| Block quotes | `> text` |
-| Code blocks | ` ```lang code ` |
-| Paragraphs | `P: text` |
-| Tables | `:-: header :-: row` |
-| Front matter | `+++[yaml\|toml] text` |
+| Target                   | Syntax                                          |
+| ------------------------ | ----------------------------------------------- |
+| Heading + its section    | `# heading text`                                |
+| Unordered / ordered list | `- item` / `1. item`                            |
+| Tasks                    | `- [ ]` unchecked, `- [x]` checked, `- [?]` any |
+| Links / images           | `[text](url)` / `![alt](url)`                   |
+| Block quotes             | `> text`                                        |
+| Code blocks              | `` ```lang code ``                              |
+| Paragraphs               | `P: text`                                       |
+| Tables                   | `:-: header :-: row`                            |
+| Front matter             | `+++[yaml\|toml] text`                          |
 
 Text match: unquoted is case-insensitive, `"quoted"` is case-sensitive, `/regex/`
 for patterns, `^start` / `end$` anchors, `*` wildcard.
